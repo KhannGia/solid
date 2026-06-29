@@ -142,3 +142,6 @@ dist
 
 # Python virtual environment
 .venv/
+
+# solc compiled output (build artifacts)
+bin/
