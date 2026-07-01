@@ -80,10 +80,17 @@ contract SimpleLending {
 
 
     // --- TODO 7: withdraw(uint256 amount) external ---
-    // require collateralBalance[msg.sender] >= amount;
-    // EFFECTS collateralBalance -= amount;
-    // require healthFactor(msg.sender) >= PRECISION ("Would be unsafe");  // kiểm SAU khi trừ
-    // INTERACTIONS collateralToken.transfer(msg.sender, amount);
+    function withdraw(uint256 amount) external {
+        require(amount > 0, "Amount must be greater than 0");
+        require(collateralBalance[msg.sender] >= amount, "Withdraw amount exceeds collateral balance");
+        //check if the user will be healthy after withdrawal
+        uint256 newCollateralBalance = collateralBalance[msg.sender] - amount;
+        uint256 newCollateralValue = newCollateralBalance * price / PRECISION;
+        uint256 newMaxBorrow = newCollateralValue * LTV / 100;
+        require(debt[msg.sender] <= newMaxBorrow, "Withdrawal would make position unhealthy");
+        collateralBalance[msg.sender] -= amount;
+        collateralToken.transfer(msg.sender, amount);
+    }
 
 
     // --- TODO 8: liquidate(address user) external ---  ⭐
