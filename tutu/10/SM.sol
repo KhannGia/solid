@@ -45,7 +45,6 @@ contract SimpleLending {
     }
 
     // --- TODO 3: setPrice(uint256 newPrice) external  (chỉ owner) ---
-    // require msg.sender == owner; price = newPrice;
     function setPrice(uint256 newPrice) external {
         require(msg.sender == owner, "Only owner can set price");
         price = newPrice;
@@ -72,8 +71,12 @@ contract SimpleLending {
     }
 
     // --- TODO 6: repay(uint256 amount) external ---
-    // require amount > 0 && amount <= debt[msg.sender];
-    // EFFECTS debt -= amount; INTERACTIONS borrowToken.transferFrom(msg.sender, address(this), amount);
+    function repay(uint256 amount) external {
+        require(amount > 0, "Amount must be greater than 0");
+        require(debt[msg.sender] >= amount, "Repay amount exceeds debt");
+        debt[msg.sender] -= amount;
+        borrowToken.transferFrom(msg.sender, address(this), amount);
+    }
 
 
     // --- TODO 7: withdraw(uint256 amount) external ---
