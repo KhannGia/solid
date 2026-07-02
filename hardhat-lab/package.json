@@ -6,10 +6,14 @@
     "compile": "hardhat compile",
     "test": "hardhat test",
     "node": "hardhat node",
-    "deploy": "hardhat run scripts/deploy.js"
+    "deploy": "hardhat run scripts/deploy.js",
+    "deploy:amm": "hardhat run scripts/deploy-amm.js",
+    "deploy:amm:sepolia": "hardhat run scripts/deploy-amm.js --network sepolia",
+    "interact:amm:sepolia": "hardhat run scripts/interact-amm.js --network sepolia"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^17.4.2",
     "hardhat": "^2.22.0"
   }
 }
