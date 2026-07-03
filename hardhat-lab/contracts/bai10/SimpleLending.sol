@@ -115,5 +115,5 @@ contract SimpleLending {
     // 1. Vì sao phải thế chấp NHIỀU HƠN số vay? => để giảm rủi ro cho lender, tránh mất vốn khi giá tài sản thế chấp giảm.
     // 2. HF < 1 nghĩa là gì? Ai lợi khi đi thanh lý? => nghĩa là khi giá trị thế chấp giảm xuống dưới mức an toàn định ra, người thanh lý (liquidator) sẽ được lợi vì họ có thể mua tài sản thế chấp với giá rẻ hơn giá trị thực tế.
     // 3. Vì sao người thanh lý được thưởng bonus? => để khuyến khích người thanh lý tham gia mua lại các khoản thanh lý, giúp duy trì sự ổn định của pool và giảm rủi ro cho hệ thống.
-    // 4. Nếu price lấy từ giá spot AMM, kẻ tấn công thao túng để làm gì? => Kẻ tấn công có thể thao túng giá để làm giảm giá trị thế chấp, từ đó khiến các vị thế trở nên không an toàn và bị thanh lý, cho phép họ mua tài sản thế chấp với giá rẻ hơn giá trị thực tế.
+    // 4. Nếu price lấy từ giá spot AMM, kẻ tấn công thao túng để làm gì? => Kẻ 
 }
