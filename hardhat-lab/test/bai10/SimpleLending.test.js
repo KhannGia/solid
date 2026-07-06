@@ -83,12 +83,10 @@ describe("SimpleLending", function () {
 
   it("TODO 3: repay giảm debt đúng lượng", async function () {
     // deposit 1000; borrow 500; repay 200 -> debt(alice) == 300
-    const tx = async () => {
-      await lending.connect(alice).deposit(amt("1000"));
-      await lending.connect(alice).borrow(amt("500"));
-      await lending.connect(alice).repay(amt("200"));
-    }
-    await expect(tx()).to.be.revertedWith("Exceeds borrow limit");
+    await lending.connect(alice).deposit(amt("1000"));
+    await lending.connect(alice).borrow(amt("500"));
+    await lending.connect(alice).repay(amt("200"));
+    expect(await lending.debt(alice.address)).to.equal(amt("300"));
   });
 
   it("TODO 4: withdraw khi vẫn khỏe -> collateralBalance giảm đúng", async function () {
@@ -101,7 +99,12 @@ describe("SimpleLending", function () {
   it("TODO 5: withdraw quá nhiều làm vị thế unhealthy -> revert", async function () {
     // deposit 1000; borrow 700; thử withdraw 500
     // (rút xong còn 500 -> maxBorrow=375 < nợ 700) -> revertedWith("Withdrawal would make position unhealthy")
-
+    const tx = async () => {
+      await lending.connect(alice).deposit(amt("1000"));
+      await lending.connect(alice).borrow(amt("700"));
+      await lending.connect(alice).withdraw(amt("500"));
+    }
+    await expect(tx()).to.be.revertedWith("Withdrawal would make position unhealthy");
   });
 
   it("TODO 6: liquidate khi giá rớt -> debt về 0, bob nhận collateral ⭐", async function () {
