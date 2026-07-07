@@ -115,6 +115,16 @@ describe("SimpleLending", function () {
     //          collateralBalance(alice) giảm (bị seize ~962.5)
     //          borrow.balanceOf(bob) giảm 700 (bob trả nợ hộ)
     //          collateral.balanceOf(bob) tăng (nhận collateral seize)
-    expect.fail("chưa viết");
+    await lending.connect(alice).deposit(amt("1000"));
+    await lending.connect(alice).borrow(amt("700"));
+    await lending.connect(owner).setPrice(amt("0.8"));
+
+    const bobBorrowBefore = await borrow.balanceOf(bob.address);
+    await lending.connect(bob).liquidate(alice.address);
+
+    expect(await lending.debt(alice.address)).to.equal(0);
+    expect(await lending.collateralBalance(alice.address)).to.be.lt(amt("1000"));
+    expect(bobBorrowBefore - await borrow.balanceOf(bob.address)).to.equal(amt("700")); // bob trả 700 nợ hộ alice
+    expect(await collateral.balanceOf(bob.address)).to.be.gt(0); // bob nhận collateral seize
   });
 });
