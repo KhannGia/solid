@@ -3,8 +3,6 @@ const { ethers } = require("hardhat");
 
 // ============================================================
 //  BÀI TẬP: VIẾT TEST CHO SimpleLending (Lending/Borrowing)
-//  - 2 test đầu ĐÃ VIẾT SẴN (deposit / borrow trong hạn mức).
-//  - Các TODO: thay expect.fail(...) bằng test thật tới khi PASS.
 //
 //  Chạy riêng file này:
 //    npm test --prefix /home/khangia/Cyclone/AC/hardhat-lab -- test/bai10/SimpleLending.test.js
@@ -108,13 +106,6 @@ describe("SimpleLending", function () {
   });
 
   it("TODO 6: liquidate khi giá rớt -> debt về 0, bob nhận collateral ⭐", async function () {
-    // 1) alice deposit 1000; borrow 700   (HF > 1 ở giá 1.0)
-    // 2) owner setPrice( amt("0.8") )      -> collateralValue=800, HF=0.914 < 1
-    // 3) bob liquidate(alice.address)
-    // 4) kiểm: debt(alice) == 0
-    //          collateralBalance(alice) giảm (bị seize ~962.5)
-    //          borrow.balanceOf(bob) giảm 700 (bob trả nợ hộ)
-    //          collateral.balanceOf(bob) tăng (nhận collateral seize)
     await lending.connect(alice).deposit(amt("1000"));
     await lending.connect(alice).borrow(amt("700"));
     await lending.connect(owner).setPrice(amt("0.8"));
