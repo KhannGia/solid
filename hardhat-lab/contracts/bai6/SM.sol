@@ -5,8 +5,9 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-// TODO 2: contract MyToken is ERC20, ERC20Burnable, Ownable {
-contract MyToken is ERC20, ERC20Burnable, Ownable {
+// TODO 2: contract MyTokenOZ is ERC20, ERC20Burnable, Ownable {
+//   (đặt tên MyTokenOZ để không trùng với contracts/bai6/MyToken.sol)
+contract MyTokenOZ is ERC20, ERC20Burnable, Ownable {
 
     // TODO 3: constructor(uint256 _initialSupply)
     constructor(uint256 _initialSupply) ERC20("My Token", "MTK") Ownable(msg.sender) {

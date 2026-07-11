@@ -5,9 +5,6 @@ const { ethers } = require("hardhat");
 //  BÀI TẬP: VIẾT THÊM TEST CHO MyToken
 //  Mỗi it() có expect.fail("TODO") -> chạy sẽ FAIL.
 //  Nhiệm vụ: thay phần TODO bằng test thật cho tới khi PASS.
-//
-//  Chạy riêng file này:
-//    npx hardhat test test/exercise.test.js
 // ============================================================
 
 describe("MyToken - Bài tập viết test", function () {
